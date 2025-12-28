@@ -84,7 +84,7 @@ const Footer = () => {
             <Tooltip>
               <TooltipTrigger asChild>
                 <Link
-                  to={"https://github.com/Munadil16"}
+                  to={"https://github.com/munadil-dev"}
                   target="_blank"
                   className={cn(
                     buttonVariants({ variant: "ghost", size: "icon" }),

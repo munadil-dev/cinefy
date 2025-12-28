@@ -11,9 +11,7 @@ import { VideoMetadataType } from "@/types/video-metadata.types";
 import { useNavigate, Link, useSearchParams } from "react-router-dom";
 
 const isValidVideo = (video: VideoMetadataType): boolean => {
-  return (
-    video.type === "video" && !!video.channelThumbnail && !!video.viewCount
-  );
+  return video.type === "video";
 };
 
 const Video = () => {

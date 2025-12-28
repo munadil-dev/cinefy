@@ -25,12 +25,23 @@ const VideoCard = ({ videoMetadata }: { videoMetadata: VideoMetadataType }) => {
       >
         <img
           className="aspect-video w-full rounded-xl"
-          src={videoMetadata.thumbnail?.[0].url}
+          src={
+            videoMetadata.thumbnail
+              ? videoMetadata.thumbnail[videoMetadata.thumbnail.length - 1].url
+              : ""
+          }
           alt="Thumbnail"
         />
+
         {videoMetadata.lengthText !== "LIVE" && (
           <p className="absolute bottom-2 right-2 select-none rounded-md bg-black p-1 text-xs font-medium text-white">
             {videoMetadata.lengthText}
+          </p>
+        )}
+
+        {videoMetadata.lengthText === "LIVE" && (
+          <p className="absolute bottom-2 right-2 rounded-sm bg-red-500 px-2 text-xs font-semibold text-white">
+            LIVE
           </p>
         )}
       </motion.div>
@@ -56,17 +67,16 @@ const VideoCard = ({ videoMetadata }: { videoMetadata: VideoMetadataType }) => {
       </div>
 
       <div className="flex items-center gap-2 text-xs font-medium text-black/90 dark:text-white/80">
-        {videoMetadata.lengthText === "LIVE" ? (
+        {videoMetadata.lengthText !== "LIVE" && (
           <>
-            <p className="relative h-2 w-2 rounded-full bg-red-500 font-medium text-white"></p>
-            <p className="absolute h-2 w-2 animate-ping rounded-full bg-red-500 font-medium text-white"></p>
-            <p className="font-semibold text-red-500">
-              {Number(videoMetadata.viewCount).toLocaleString()} watching
+            <p>
+              {videoMetadata.viewCountText
+                ? videoMetadata.viewCountText
+                : Intl.NumberFormat("en", { notation: "compact" }).format(
+                    Number(videoMetadata.viewCount)
+                  ) + " views"}
+              {}
             </p>
-          </>
-        ) : (
-          <>
-            <p>{Number(videoMetadata.viewCount).toLocaleString()} views</p>
             <p className="h-1 w-1 rounded-full bg-black/90 dark:bg-white/80"></p>
             <p>{videoMetadata.publishedTimeText}</p>
           </>

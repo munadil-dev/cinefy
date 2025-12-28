@@ -10,9 +10,7 @@ interface DisplayContentProps {
 }
 
 const isValidVideo = (video: VideoMetadataType): boolean => {
-  return (
-    video.type === "video" && !!video.channelThumbnail && !!video.viewCount
-  );
+  return video.type === "video";
 };
 
 const DisplayContent = memo(({ data, isLoading }: DisplayContentProps) => {
